@@ -1,0 +1,258 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and subscription data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "nama": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin_rt", "super_admin", "Warga"] },
+        "subscription": { "type": "string", "enum": ["Gratis", "Warga", "Harmoni", "Nusantara"] },
+        "subscriptionStatus": { "type": "string", "enum": ["active", "pending", "expired"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "subscription"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Subscription purchase transactions",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "package": { "type": "string" },
+        "amount": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "package", "status"]
+    },
+    "Warga": {
+      "title": "Warga",
+      "description": "Resident data",
+      "type": "object",
+      "properties": {
+        "nik": { "type": "string" },
+        "nama": { "type": "string" },
+        "kk": { "type": "string" },
+        "alamat": { "type": "string" },
+        "noHp": { "type": "string" },
+        "status": { "type": "string", "enum": ["Aktif", "Pindah", "Meninggal"] },
+        "editApproved": { "type": "boolean" }
+      },
+      "required": ["nik", "nama", "kk"]
+    },
+    "Pengaduan": {
+      "title": "Pengaduan",
+      "description": "Resident complaints and edit requests",
+      "type": "object",
+      "properties": {
+        "judul": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "status": { "type": "string", "enum": ["Menunggu", "Selesai", "Ditolak", "pending"] },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "pelapor": { "type": "string" },
+        "tanggapan": { "type": "string" },
+        "targetWargaId": { "type": "string" }
+      },
+      "required": ["judul", "deskripsi", "status"]
+    },
+    "Notifikasi": {
+      "title": "Notifikasi",
+      "description": "System notifications",
+      "type": "object",
+      "properties": {
+        "judul": { "type": "string" },
+        "pesan": { "type": "string" },
+        "tipe": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["judul", "pesan", "read"]
+    },
+    "Keuangan": {
+      "title": "Keuangan",
+      "description": "Financial transactions",
+      "type": "object",
+      "properties": {
+        "jenis": { "type": "string", "enum": ["Pemasukan", "Pengeluaran"] },
+        "jumlah": { "type": "number" },
+        "keterangan": { "type": "string" },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["jenis", "jumlah", "tanggal"]
+    },
+    "Surat": {
+      "title": "Surat",
+      "description": "Digital letter requests",
+      "type": "object",
+      "properties": {
+        "jenis": { "type": "string" },
+        "nama": { "type": "string" },
+        "nik": { "type": "string" },
+        "keperluan": { "type": "string" },
+        "status": { "type": "string", "enum": ["Menunggu", "Selesai", "Ditolak"] },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["jenis", "nama", "nik", "status"]
+    },
+    "Pengumuman": {
+      "title": "Pengumuman",
+      "description": "Announcements",
+      "type": "object",
+      "properties": {
+        "judul": { "type": "string" },
+        "isi": { "type": "string" },
+        "kategori": { "type": "string" },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["judul", "isi", "tanggal"]
+    },
+    "MutasiWarga": {
+      "title": "Mutasi Warga",
+      "description": "Citizen status change history",
+      "type": "object",
+      "properties": {
+        "wargaId": { "type": "string" },
+        "nama": { "type": "string" },
+        "nik": { "type": "string" },
+        "statusLama": { "type": "string" },
+        "statusBaru": { "type": "string" },
+        "pindahKe": { "type": "string" },
+        "keperluanPindah": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "operator": { "type": "string" }
+      },
+      "required": ["wargaId", "nama", "nik", "statusLama", "statusBaru", "timestamp", "operator"]
+    },
+    "KartuKeluarga": {
+      "title": "Kartu Keluarga",
+      "description": "Family card data",
+      "type": "object",
+      "properties": {
+        "noKk": { "type": "string" },
+        "kepalaKeluarga": { "type": "string" },
+        "alamat": { "type": "string" },
+        "jumlahAnggota": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["noKk", "alamat"]
+    },
+    "RumahBlok": {
+      "title": "Rumah / Blok",
+      "description": "Housing and block data",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "alamat": { "type": "string" },
+        "penghuni": { "type": "string" },
+        "status": { "type": "string", "enum": ["Dihuni", "Kosong"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "alamat"]
+    },
+    "Pengurus": {
+      "title": "Pengurus",
+      "description": "Management data for the village",
+      "type": "object",
+      "properties": {
+        "nama": { "type": "string" },
+        "jabatan": { "type": "string", "enum": ["Bandesa Adat", "Petajuh", "Penyarikan", "Petengen"] },
+        "status": { "type": "string", "enum": ["Aktif", "Non Aktif"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["nama", "jabatan", "status"]
+    },
+    "Arsip": {
+      "title": "Arsip",
+      "description": "Document archives",
+      "type": "object",
+      "properties": {
+        "judul": { "type": "string" },
+        "kategori": { "type": "string", "enum": ["Keuangan", "Surat", "Laporan", "Umum"] },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "keterangan": { "type": "string" },
+        "linkFile": { "type": "string" }
+      },
+      "required": ["judul", "kategori", "tanggal"]
+    },
+    "Agenda": {
+      "title": "Agenda",
+      "description": "Event agenda",
+      "type": "object",
+      "properties": {
+        "namaKegiatan": { "type": "string" },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "lokasi": { "type": "string" },
+        "deskripsi": { "type": "string" },
+        "status": { "type": "string", "enum": ["Akan Datang", "Berlangsung", "Selesai", "Dibatalkan"] }
+      },
+      "required": ["namaKegiatan", "tanggal", "lokasi", "status"]
+    },
+    "Absensi": {
+      "title": "Absensi",
+      "description": "Attendance records",
+      "type": "object",
+      "properties": {
+        "namaKegiatan": { "type": "string" },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "daftarHadir": { "type": "string" },
+        "status": { "type": "string", "enum": ["Berlangsung", "Selesai"] }
+      },
+      "required": ["namaKegiatan", "tanggal", "status"]
+    },
+    "Iuran": {
+      "title": "Iuran",
+      "description": "Citizen dues payments",
+      "type": "object",
+      "properties": {
+        "namaWarga": { "type": "string" },
+        "jenisIuran": { "type": "string", "enum": ["Iuran Bulanan", "Iuran Tahunan"] },
+        "jumlah": { "type": "number" },
+        "tanggalBayar": { "type": "string", "format": "date-time" },
+        "periode": { "type": "string" },
+        "keterangan": { "type": "string" }
+      },
+      "required": ["namaWarga", "jenisIuran", "jumlah", "tanggalBayar", "periode"]
+    },
+    "Tagihan": {
+      "title": "Tagihan",
+      "description": "Citizen bills and fines",
+      "type": "object",
+      "properties": {
+        "namaWarga": { "type": "string" },
+        "jenisTagihan": { "type": "string", "enum": ["Denda", "Pepeson", "Lainnya"] },
+        "jumlah": { "type": "number" },
+        "tanggalJatuhTempo": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["Belum Lunas", "Lunas"] },
+        "keterangan": { "type": "string" }
+      },
+      "required": ["namaWarga", "jenisTagihan", "jumlah", "tanggalJatuhTempo", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/transactions/{transactionId}": { "schema": "Transaction", "description": "Payment transactions" },
+    "/warga/{wargaId}": { "schema": "Warga", "description": "Resident data" },
+    "/pengaduan/{pengaduanId}": { "schema": "Pengaduan", "description": "Complaints" },
+    "/notifikasi/{notifId}": { "schema": "Notifikasi", "description": "Notifications" },
+    "/keuangan/{keuanganId}": { "schema": "Keuangan", "description": "Financial records" },
+    "/surat/{suratId}": { "schema": "Surat", "description": "Letter requests" },
+    "/pengumuman/{pengumumanId}": { "schema": "Pengumuman", "description": "Announcements" },
+    "/mutasi_warga/{mutasiId}": { "schema": "MutasiWarga", "description": "Mutation history" },
+    "/kartu_keluarga/{kkId}": { "schema": "KartuKeluarga", "description": "Family cards" },
+    "/rumah_blok/{rumahId}": { "schema": "RumahBlok", "description": "Housing data" },
+    "/pengurus/{pengurusId}": { "schema": "Pengurus", "description": "Management data" },
+    "/arsip/{arsipId}": { "schema": "Arsip", "description": "Document archives" },
+    "/agenda/{agendaId}": { "schema": "Agenda", "description": "Event agenda" },
+    "/absensi/{absensiId}": { "schema": "Absensi", "description": "Attendance records" },
+    "/iuran/{iuranId}": { "schema": "Iuran", "description": "Citizen dues payments" },
+    "/tagihan/{tagihanId}": { "schema": "Tagihan", "description": "Citizen bills and fines" }
+  }
+}

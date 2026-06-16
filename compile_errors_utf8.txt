@@ -1,0 +1,4 @@
+﻿src/pages/dashboard/Pengeluaran.tsx(84,25): error TS2339: Property 'uid' does not exist on type 'User'.
+src/pages/dashboard/Profil.tsx(17,17): error TS2339: Property 'noHp' does not exist on type 'User'.
+src/pages/dashboard/Profil.tsx(47,9): error TS2353: Object literal may only specify known properties, and 'noHp' does not exist in type 'Partial<User>'.
+src/pages/dashboard/SuratOnline.tsx(58,20): error TS2339: Property 'nik' does not exist on type 'User'.
